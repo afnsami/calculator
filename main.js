@@ -36,7 +36,6 @@ numberButtons.forEach(function(button) {
             previousValue = parseFloat(tempValue);
 
             //DEBUG
-            console.log("Display Value: " + displayValue.textContent);
             console.log("Previous Value: " + previousValue);
             console.log("Next Value: " + nextValue);
 
@@ -47,7 +46,6 @@ numberButtons.forEach(function(button) {
             displayValue.textContent += e.target.textContent;
 
             //DEBUG
-            console.log("Display Value: " + displayValue.textContent);
             console.log("Previous Value: " + previousValue);
             console.log("Next Value: " + nextValue);
         }
@@ -65,7 +63,6 @@ clearButton.addEventListener("click", function(e) {
     valueChange = false;
     previousValue = 0;
 
-    console.log("Display Value: " + displayValue.textContent);
     console.log("Previous Value: " + previousValue);
     console.log("Next Value: " + nextValue);
 });
@@ -77,16 +74,30 @@ reverseSignButton.addEventListener("click", function(e) {
 });
 
 
+let clickCount = 0;
 
 // (+) BUTTON ACTION
 plusButton.addEventListener("click", function(e) {
     valueChange = true;
+    clickCount += 1;
     displayValue.textContent += "+";
     operationSelect = '+';
 
-    console.log(previousValue);
-    console.log(operationSelect);
-    console.log(valueChange);
+    console.log("Click Count: " + clickCount);
+    
+    if (clickCount > 1) {
+
+        currentAns = operate(previousValue, operationSelect, nextValue);
+        displayValue.textContent = currentAns + "+";
+
+        previousValue = currentAns;
+        tempValue2 = 0;
+        nextValue = 0;
+
+        console.log("Answer: " + currentAns);
+        console.log("Previous Value: " + previousValue);
+        console.log("Next Value: " + nextValue);
+    }
 });
 
 
