@@ -1,6 +1,4 @@
 
-
-
 let displayValue = document.getElementById("displayValue");
 let valueChange = false;
 
@@ -15,11 +13,20 @@ let nextValue;
 let tempAns;
 let currentAns;
 
+//BUTTON CLICK COUNT
+let clickCount = 0;
+
 //BUTTONS
 let clearButton = document.getElementById("clear");
 let reverseSignButton = document.getElementById("reverse");
 let equalButton = document.getElementById("equal");
+
 let plusButton = document.getElementById("plus");
+let minusButton = document.getElementById("minus");
+let multiplyButton = document.getElementById("multiply");
+let divideButton = document.getElementById("divide");
+let modulusButton = document.getElementById("modulus");
+
 let numberButtons = document.querySelectorAll(".digit");
 
 
@@ -54,7 +61,7 @@ numberButtons.forEach(function(button) {
 
 
 
-//ALL CLEAR BUTTON ACTION
+//CLEAR BUTTON ACTION
 clearButton.addEventListener("click", function(e) {
     console.log("------CLEAR------");
 
@@ -62,6 +69,7 @@ clearButton.addEventListener("click", function(e) {
     nextValue = 0;
     valueChange = false;
     previousValue = 0;
+    clickCount = 0;
 
     console.log("Previous Value: " + previousValue);
     console.log("Next Value: " + nextValue);
@@ -74,16 +82,13 @@ reverseSignButton.addEventListener("click", function(e) {
 });
 
 
-let clickCount = 0;
 
-// (+) BUTTON ACTION
+// (+) BUTTON
 plusButton.addEventListener("click", function(e) {
     valueChange = true;
     clickCount += 1;
     displayValue.textContent += "+";
     operationSelect = '+';
-
-    console.log("Click Count: " + clickCount);
     
     if (clickCount > 1) {
 
@@ -93,16 +98,101 @@ plusButton.addEventListener("click", function(e) {
         previousValue = currentAns;
         tempValue2 = 0;
         nextValue = 0;
+    }
+});
 
-        console.log("Answer: " + currentAns);
+// (-) BUTTON
+minusButton.addEventListener("click", function(e) {
+    valueChange = true;
+    clickCount += 1;
+    displayValue.textContent += "-";
+    operationSelect = '-';
+    
+    if (clickCount > 1) {
+
+        currentAns = operate(previousValue, operationSelect, nextValue);
+        displayValue.textContent = currentAns + "-";
+
+        previousValue = currentAns;
+        tempValue2 = 0;
+        nextValue = 0;
+    }
+});
+
+// (×) BUTTON
+multiplyButton.addEventListener("click", function(e) {
+    valueChange = true;
+    clickCount += 1;
+    displayValue.textContent += "×";
+    operationSelect = '*';
+    
+    if (clickCount > 1) {
+
+        currentAns = operate(previousValue, operationSelect, nextValue);
+        displayValue.textContent = currentAns + "×";
+
+        previousValue = currentAns;
+        tempValue2 = 0;
+        nextValue = 0;
+
+        console.log("Click Count: " + clickCount);
         console.log("Previous Value: " + previousValue);
         console.log("Next Value: " + nextValue);
     }
+
+    console.log(operationSelect);
+});
+
+// (÷) BUTTON
+divideButton.addEventListener("click", function(e) {
+    valueChange = true;
+    clickCount += 1;
+    displayValue.textContent += "÷";
+    operationSelect = '/';
+    
+    if (clickCount > 1) {
+
+        currentAns = operate(previousValue, operationSelect, nextValue);
+        displayValue.textContent = currentAns + "÷";
+
+        previousValue = currentAns;
+        tempValue2 = 0;
+        nextValue = 0;
+
+        console.log("Click Count: " + clickCount);
+        console.log("Previous Value: " + previousValue);
+        console.log("Next Value: " + nextValue);
+    }
+
+    console.log(operationSelect);
+});
+
+// (%) BUTTON
+modulusButton.addEventListener("click", function(e) {
+    valueChange = true;
+    clickCount += 1;
+    displayValue.textContent += "%";
+    operationSelect = '%';
+    
+    if (clickCount > 1) {
+
+        currentAns = operate(previousValue, operationSelect, nextValue);
+        displayValue.textContent = currentAns + "%";
+
+        previousValue = currentAns;
+        tempValue2 = 0;
+        nextValue = 0;
+
+        console.log("Click Count: " + clickCount);
+        console.log("Previous Value: " + previousValue);
+        console.log("Next Value: " + nextValue);
+    }
+    console.log(operationSelect);
 });
 
 
 
-//EQUAL BUTTON
+// (=) BUTTON
 equalButton.addEventListener("click", function(e) {
 
     currentAns = operate(previousValue, operationSelect, nextValue);
@@ -135,8 +225,6 @@ function divide(a, b) {
 function modulus(a, b) {
     return a % b;
 }
-
-
 
 //OPERATE
 function operate(num1, operation, num2) {
