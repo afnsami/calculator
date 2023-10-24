@@ -13,8 +13,7 @@ let nextValue;
 let tempAns;
 let currentAns;
 
-//BUTTON CLICK COUNT
-let clickCount = 0;
+let clickCount = 0; //OPERATOR BUTTON CLICK COUNT
 
 //BUTTONS
 let clearButton = document.getElementById("clear");
@@ -36,6 +35,7 @@ numberButtons.forEach(function(button) {
 
     button.addEventListener("click", function(e) {
 
+        //OLD NUMBER CONTAINER
         if (valueChange == false) {
 
             displayValue.textContent += e.target.textContent;
@@ -43,9 +43,10 @@ numberButtons.forEach(function(button) {
             previousValue = parseFloat(tempValue);
 
             //DEBUG
-            console.log("Previous Value: " + previousValue);
+            console.log("P Value: " + previousValue);
             console.log("Next Value: " + nextValue);
-
+        
+        //NEW NUMBER CONTAINER
         } else if (valueChange == true) {
 
             tempValue2 += e.target.textContent;
@@ -53,7 +54,7 @@ numberButtons.forEach(function(button) {
             displayValue.textContent += e.target.textContent;
 
             //DEBUG
-            console.log("Previous Value: " + previousValue);
+            console.log("P Value: " + previousValue);
             console.log("Next Value: " + nextValue);
         }
     });
@@ -71,7 +72,7 @@ clearButton.addEventListener("click", function(e) {
     previousValue = 0;
     clickCount = 0;
 
-    console.log("Previous Value: " + previousValue);
+    console.log("Pr Value: " + previousValue);
     console.log("Next Value: " + nextValue);
 });
 
@@ -80,8 +81,6 @@ reverseSignButton.addEventListener("click", function(e) {
     displayValue.textContent = displayValue.textContent * -1;
     previousValue = previousValue * -1;
 });
-
-
 
 // (+) BUTTON
 plusButton.addEventListener("click", function(e) {
@@ -97,8 +96,9 @@ plusButton.addEventListener("click", function(e) {
 
         previousValue = currentAns;
         tempValue2 = 0;
-        nextValue = 0;
     }
+
+    console.log(clickCount);
 });
 
 // (-) BUTTON
@@ -115,7 +115,6 @@ minusButton.addEventListener("click", function(e) {
 
         previousValue = currentAns;
         tempValue2 = 0;
-        nextValue = 0;
     }
 });
 
@@ -125,7 +124,7 @@ multiplyButton.addEventListener("click", function(e) {
     clickCount += 1;
     displayValue.textContent += "×";
     operationSelect = '*';
-    
+
     if (clickCount > 1) {
 
         currentAns = operate(previousValue, operationSelect, nextValue);
@@ -133,14 +132,11 @@ multiplyButton.addEventListener("click", function(e) {
 
         previousValue = currentAns;
         tempValue2 = 0;
-        nextValue = 0;
 
-        console.log("Click Count: " + clickCount);
-        console.log("Previous Value: " + previousValue);
-        console.log("Next Value: " + nextValue);
+        console.log("previOUS val: " + previousValue);
     }
 
-    console.log(operationSelect);
+    console.log(clickCount);
 });
 
 // (÷) BUTTON
@@ -160,7 +156,7 @@ divideButton.addEventListener("click", function(e) {
         nextValue = 0;
 
         console.log("Click Count: " + clickCount);
-        console.log("Previous Value: " + previousValue);
+        console.log("P Value: " + previousValue);
         console.log("Next Value: " + nextValue);
     }
 
@@ -184,17 +180,15 @@ modulusButton.addEventListener("click", function(e) {
         nextValue = 0;
 
         console.log("Click Count: " + clickCount);
-        console.log("Previous Value: " + previousValue);
+        console.log("P Value: " + previousValue);
         console.log("Next Value: " + nextValue);
     }
     console.log(operationSelect);
 });
 
-
-
 // (=) BUTTON
 equalButton.addEventListener("click", function(e) {
-
+    clickCount = 0;
     currentAns = operate(previousValue, operationSelect, nextValue);
     displayValue.textContent = currentAns;
 
@@ -202,8 +196,8 @@ equalButton.addEventListener("click", function(e) {
     tempValue2 = 0;
     nextValue = 0;
 
-    console.log("Answer: " + currentAns);
-    console.log("Previous Value: " + previousValue);
+    console.log("-----(Answer)-----> " + currentAns);
+    console.log("P Value: " + previousValue);
     console.log("Next Value: " + nextValue);
 });
 
