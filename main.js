@@ -1,19 +1,4 @@
-
 let displayValue = document.getElementById("displayValue");
-let valueChange = false;
-
-let tempValue = '';
-let previousValue;
-
-let operationSelect = '';
-
-let tempValue2 = '';
-let nextValue;
-
-let tempAns;
-let currentAns;
-
-let clickCount = 0; //OPERATOR BUTTON CLICK COUNT
 
 //BUTTONS
 let clearButton = document.getElementById("clear");
@@ -28,55 +13,48 @@ let modulusButton = document.getElementById("modulus");
 
 let numberButtons = document.querySelectorAll(".digit");
 
+//RANDOM VARIABLES
+let previousValue, nextValue, currentAnswer, newAns;
+let operationSelect = '';
+let valueChange = false;
+let clickCount = 0;
 
-
-//NUMBER BUTTON ACTION
+//NUMBER BUTTONS ACTION
 numberButtons.forEach(function(button) {
 
     button.addEventListener("click", function(e) {
 
         //OLD NUMBER CONTAINER
         if (valueChange == false) {
-
             displayValue.textContent += e.target.textContent;
-            tempValue = displayValue.textContent;
-            previousValue = parseFloat(tempValue);
-
-            //DEBUG
-            console.log("P Value: " + previousValue);
-            console.log("Next Value: " + nextValue);
+            previousValue = parseFloat(displayValue.textContent);
+            
+            console.log("P value: " + previousValue);
         
         //NEW NUMBER CONTAINER
         } else if (valueChange == true) {
-
-            tempValue2 += e.target.textContent;
-            nextValue = parseFloat(tempValue2);
             displayValue.textContent += e.target.textContent;
+            nextValue = parseFloat((nextValue || 0) + e.target.textContent);
 
-            //DEBUG
-            console.log("P Value: " + previousValue);
-            console.log("Next Value: " + nextValue);
+            console.log("Next value: " + nextValue);
+            newAns = (operate(previousValue, operationSelect, nextValue));
+            console.log(newAns);
         }
     });
 });
 
 
 
-//CLEAR BUTTON ACTION
+// (C) BUTTON
 clearButton.addEventListener("click", function(e) {
-    console.log("------CLEAR------");
-
     displayValue.textContent = "";
     nextValue = 0;
     valueChange = false;
     previousValue = 0;
     clickCount = 0;
-
-    console.log("Pr Value: " + previousValue);
-    console.log("Next Value: " + nextValue);
 });
 
-//REVERSE SIGN BUTTON ACTION
+// (+/-) BUTTON
 reverseSignButton.addEventListener("click", function(e) {
     displayValue.textContent = displayValue.textContent * -1;
     previousValue = previousValue * -1;
@@ -85,120 +63,99 @@ reverseSignButton.addEventListener("click", function(e) {
 // (+) BUTTON
 plusButton.addEventListener("click", function(e) {
     valueChange = true;
-    clickCount += 1;
+    clickCount++;
     displayValue.textContent += "+";
     operationSelect = '+';
-    
+
+    console.log("(" + operationSelect + ")" + " " + clickCount);
+
     if (clickCount > 1) {
+        currentAnswer = newAns;
+        displayValue.textContent = currentAnswer + "+";
 
-        currentAns = operate(previousValue, operationSelect, nextValue);
-        displayValue.textContent = currentAns + "+";
-
-        previousValue = currentAns;
-        tempValue2 = 0;
+        previousValue = currentAnswer;
+        nextValue = 0;
     }
-
-    console.log(clickCount);
 });
 
 // (-) BUTTON
 minusButton.addEventListener("click", function(e) {
     valueChange = true;
-    clickCount += 1;
+    clickCount++;
     displayValue.textContent += "-";
     operationSelect = '-';
-    
+
+    console.log("(" + operationSelect + ")" + " " + clickCount);
+
     if (clickCount > 1) {
+        currentAnswer = newAns;
+        displayValue.textContent = currentAnswer + "-";
 
-        currentAns = operate(previousValue, operationSelect, nextValue);
-        displayValue.textContent = currentAns + "-";
-
-        previousValue = currentAns;
-        tempValue2 = 0;
+        previousValue = currentAnswer;
+        nextValue = 0;
     }
+    console.log("P. value: " + previousValue);
+    console.log("Next value: " + nextValue);
+    console.log(clickCount);
 });
 
 // (×) BUTTON
 multiplyButton.addEventListener("click", function(e) {
     valueChange = true;
-    clickCount += 1;
+    clickCount++;
     displayValue.textContent += "×";
     operationSelect = '*';
 
     if (clickCount > 1) {
+        currentAnswer = newAns;
+        displayValue.textContent = currentAnswer + "×";
 
-        currentAns = operate(previousValue, operationSelect, nextValue);
-        displayValue.textContent = currentAns + "×";
-
-        previousValue = currentAns;
-        tempValue2 = 0;
-
-        console.log("previOUS val: " + previousValue);
+        previousValue = currentAnswer;
+        nextValue = 0;
     }
-
-    console.log(clickCount);
 });
 
 // (÷) BUTTON
 divideButton.addEventListener("click", function(e) {
     valueChange = true;
-    clickCount += 1;
+    clickCount++;
     displayValue.textContent += "÷";
     operationSelect = '/';
     
     if (clickCount > 1) {
+        currentAnswer = newAns;
+        displayValue.textContent = currentAnswer + "÷";
 
-        currentAns = operate(previousValue, operationSelect, nextValue);
-        displayValue.textContent = currentAns + "÷";
-
-        previousValue = currentAns;
-        tempValue2 = 0;
+        previousValue = currentAnswer;
         nextValue = 0;
-
-        console.log("Click Count: " + clickCount);
-        console.log("P Value: " + previousValue);
-        console.log("Next Value: " + nextValue);
     }
-
-    console.log(operationSelect);
 });
 
 // (%) BUTTON
 modulusButton.addEventListener("click", function(e) {
     valueChange = true;
-    clickCount += 1;
+    clickCount++;
     displayValue.textContent += "%";
     operationSelect = '%';
     
     if (clickCount > 1) {
 
-        currentAns = operate(previousValue, operationSelect, nextValue);
-        displayValue.textContent = currentAns + "%";
+        currentAnswer = operate(previousValue, operationSelect, nextValue);
+        displayValue.textContent = currentAnswer + "%";
 
-        previousValue = currentAns;
-        tempValue2 = 0;
+        previousValue = currentAnswer;
         nextValue = 0;
-
-        console.log("Click Count: " + clickCount);
-        console.log("P Value: " + previousValue);
-        console.log("Next Value: " + nextValue);
     }
-    console.log(operationSelect);
 });
 
 // (=) BUTTON
 equalButton.addEventListener("click", function(e) {
     clickCount = 0;
-    currentAns = operate(previousValue, operationSelect, nextValue);
-    displayValue.textContent = currentAns;
+    currentAnswer = operate(previousValue, operationSelect, nextValue);
+    displayValue.textContent = currentAnswer;
 
-    previousValue = currentAns;
-    tempValue2 = 0;
+    previousValue = currentAnswer;
     nextValue = 0;
-
-    console.log("-----(Answer)-----> " + currentAns);
-    console.log("P Value: " + previousValue);
-    console.log("Next Value: " + nextValue);
 });
 
 
@@ -221,18 +178,18 @@ function modulus(a, b) {
 }
 
 //OPERATE
-function operate(num1, operation, num2) {
+function operate(a, operator, b) {
 
-    if (operation == '+') {
-        return add(num1, num2);
-    } else if (operation == '-') {
-        return subtract(num1, num2);
-    } else if (operation == '*') {
-        return multiply(num1, num2);
-    } else if (operation == '/') {
-        return divide(num1, num2);
-    } else if (operation == '%') {
-        return modulus(num1, num2)
+    if (operator == '+') {
+        return add(a, b);
+    } else if (operator == '-') {
+        return subtract(a, b);
+    } else if (operator == '*') {
+        return multiply(a, b);
+    } else if (operator == '/') {
+        return divide(a, b);
+    } else if (operator == '%') {
+        return modulus(a, b)
     } else {
         return "ERROR!";
     }

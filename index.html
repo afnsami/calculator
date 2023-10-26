@@ -10,36 +10,50 @@
 
 <body>
 
-    <div class="calculator">
-        <div class="display">
-            <div id="displayValue"></div>
+    <div class="mainContainer">
+
+        <!--CONTAINS CALCULATOR-->
+        <div class="calContainer">
+            <div class="calculator">
+                <div class="display">
+                    <div id="displayValue"></div>
+                </div>
+
+                <div class="buttonContainer">
+                    <button type="button" id="clear" value="">C</button>
+                    <button type="button" id="reverse" value="">±</button>
+                    <button type="button" id="modulus" value="">%</button>
+                    <button type="button" id="divide" class="operator" value="">÷</button>
+
+                    <button type="button" class="digit" value="">7</button>
+                    <button type="button" class="digit" value="">8</button>
+                    <button type="button" class="digit" value="">9</button>
+                    <button type="button" id="multiply" class="operator" value="">×</button>
+
+                    <button type="button" class="digit" value="">4</button>
+                    <button type="button" class="digit" value="">5</button>
+                    <button type="button" class="digit" value="">6</button>
+                    <button type="button" id="minus" class="operator" value="">-</button>
+
+                    <button type="button" class="digit" value="">1</button>
+                    <button type="button" class="digit" value="">2</button>
+                    <button type="button" class="digit" value="">3</button>
+                    <button type="button" id="plus" class="operator" value="">+</button>
+
+                    <button type="button" class="digit" value="0">0</button>
+                    <button type="button" class="digit" value="">.</button>
+                    <button type="button" id="equal" class="equal" value="=">=</button>
+                </div>
+            </div>
         </div>
 
-        <div class="buttonContainer">
-            <button type="button" id="clear" value="">C</button>
-            <button type="button" id="reverse" value="">±</button>
-            <button type="button" id="modulus" value="">%</button>
-            <button type="button" id="divide" class="operator" value="">÷</button>
+        <!--CONTAINS FOOTER-->
+        <footer class="footer">
+            <p>Made by <a href="https://bento.me/anas" target="_blank">Anaseig</a> </p>
+            <p>---</p>
+            <p>View <a href="https://github.com/anaseig/calculator" target="_blank">Source Code</a></p>
+        </footer>
 
-            <button type="button" class="digit" value="">7</button>
-            <button type="button" class="digit" value="">8</button>
-            <button type="button" class="digit" value="">9</button>
-            <button type="button" id="multiply" class="operator" value="">×</button>
-
-            <button type="button" class="digit" value="">4</button>
-            <button type="button" class="digit" value="">5</button>
-            <button type="button" class="digit" value="">6</button>
-            <button type="button" id="minus" class="operator" value="">-</button>
-
-            <button type="button" class="digit" value="">1</button>
-            <button type="button" class="digit" value="">2</button>
-            <button type="button" class="digit" value="">3</button>
-            <button type="button" id="plus" class="operator" value="">+</button>
-
-            <button type="button" class="digit" value="0">0</button>
-            <button type="button" class="digit" value="">.</button>
-            <button type="button" id="equal" class="equal" value="">=</button>
-        </div>
     </div>
     
 </body>
