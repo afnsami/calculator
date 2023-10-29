@@ -47,6 +47,7 @@ clearButton.addEventListener("click", function(e) {
 
     nextValue = 0;
     previousValue = 0;
+    currentAnswer = 0;
     clickCount = 0;
     valueChange = false;
 });
