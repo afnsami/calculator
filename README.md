@@ -11,11 +11,11 @@ I know it is not perfect, and still it needs some improvements, even some very u
 
 ## The Code Structure
 - <b>Variables</b> <br>
-	- selector variables
-	- calculation logic variable
+	- HTML selectors
+	- calculation logic variables
 - <b>Button Action</b> <br>
 	- what each button will do
-	- changes to be made when pressed
+	- changes to make when pressed
 - <b>Functions</b> <br> 
 	- operation function
 	- operate function
