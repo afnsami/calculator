@@ -7,7 +7,7 @@
 <p>I thought this project would be very hard, but turns out it was easier than I thought. Mainly because of I learned a lot in the previous <a href="https://github.com/anaseig/pixel_sketch">Pixel Sketch</a> project, and I was able to transfer what I've learned in this project.</p>
 <p>All I needed is to push myself a bit harder to come up with a logic and of course, some help from the <a href="https://discord.gg/fbFCkYabZB">Odin Community</a>. <br>
 <br>
-I know it is not perfect, and still it needs some improvements, so I will be looking forward to update this.</p>
+I know it is not perfect, and still it needs some improvements, even some very useful features. So I will be looking forward to update this. (if I don't procastinate)</p>
 
 ## The Code Structure
 - <b>Variables</b> <br>
