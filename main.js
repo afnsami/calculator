@@ -188,13 +188,22 @@ function operate(a, operator, b) {
     } else if (operator == '*') {
         result = multiply(a, b);
     } else if (operator == '/') {
-        result = divide(a, b);
+        if (b == 0) {
+            result = "ERROR";
+        } else {
+            result = divide(a, b);
+        }
     } else if (operator == '%') {
         result = modulus(a, b)
     } else {
         result = "ERROR!";
     }
     
-    //INCLUDES DECIMAL POINT IF CONSISTS
-    return Number.isInteger(result) ? result : result.toFixed(2);
+    //RETURN ERROR IF DIVIDED BY '0'
+    if (typeof result === 'string') {
+        return result;
+    } else {
+        //INCLUDES DECIMAL POINT IF CONSISTS
+        return Number.isInteger(result) ? result : result.toFixed(2);
+    }
 }
