@@ -21,18 +21,18 @@ body {
 }
 
 /*CONTAINER*/
-.calContainer {
-    padding: 25px 25px;
-    border-radius: 35px;
-    background-color: black;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-}
 .mainContainer {
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+.calContainer {
+    padding: 25px 25px;
+    border-radius: 35px;
+    background-color: black;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 .buttonContainer {
     width: 100%;
@@ -50,6 +50,8 @@ body {
 /*CALCULATOR BODY*/
 .calculator {
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
     gap: 30px;
 }
@@ -60,11 +62,12 @@ body {
     justify-content: right;
     padding: 13px;
 
-    max-width: 376px;
+    min-width: 376px;
     min-height: 129px;
     border-radius: 15px;
     font-size: 90px;
 
+    letter-spacing: -10px;
     color: white;
     background-color: rgb(25, 25, 25);
 }
@@ -91,7 +94,7 @@ button:hover {
 .operator, .equal {
     background-color: orange;
 }
-.digit {
+.digit, .decimal {
     background-color: rgb(36, 36, 36);
     color: white;
 }

@@ -1,6 +1,9 @@
+//DISPLAY
 let displayValue = document.getElementById("displayValue");
+let tempDisplayValue = document.getElementById("tempDisplayValue");
 
 //BUTTONS
+let numberButtons = document.querySelectorAll(".digit");
 let clearButton = document.getElementById("clear");
 let reverseSignButton = document.getElementById("reverse");
 let equalButton = document.getElementById("equal");
@@ -11,104 +14,105 @@ let multiplyButton = document.getElementById("multiply");
 let divideButton = document.getElementById("divide");
 let modulusButton = document.getElementById("modulus");
 
-let numberButtons = document.querySelectorAll(".digit");
-
 //RANDOM VARIABLES
-let previousValue, nextValue, currentAnswer, newAns;
+let screenContent, previousValue, nextValue, currentAnswer, newAns;
 let operationSelect = '';
 let valueChange = false;
 let clickCount = 0;
 
 //NUMBER BUTTONS ACTION
 numberButtons.forEach(function(button) {
-
     button.addEventListener("click", function(e) {
-
         //OLD NUMBER CONTAINER
         if (valueChange == false) {
             displayValue.textContent += e.target.textContent;
             previousValue = parseFloat(displayValue.textContent);
-            
-            console.log("P value: " + previousValue);
-        
+
         //NEW NUMBER CONTAINER
         } else if (valueChange == true) {
-            displayValue.textContent += e.target.textContent;
-            nextValue = parseFloat((nextValue || 0) + e.target.textContent);
+            displayValue.style.color = "gray";
 
-            console.log("Next value: " + nextValue);
+            tempDisplayValue.textContent += e.target.textContent;
+            nextValue = parseFloat(tempDisplayValue.textContent);
             newAns = (operate(previousValue, operationSelect, nextValue));
-            console.log(newAns);
+            currentAnswer = newAns;
         }
     });
 });
 
-
-
-// (C) BUTTON
+// (AC) BUTTON
 clearButton.addEventListener("click", function(e) {
     displayValue.textContent = "";
+    tempDisplayValue.textContent = "";
+    displayValue.style.color = "white";
+
     nextValue = 0;
-    valueChange = false;
     previousValue = 0;
     clickCount = 0;
+    valueChange = false;
 });
 
 // (+/-) BUTTON
 reverseSignButton.addEventListener("click", function(e) {
-    displayValue.textContent = displayValue.textContent * -1;
+    displayValue.textContent *= -1;
     previousValue = previousValue * -1;
+
+    //CALCULATES ANSWER IF EQUATION EXISTS, THEN TURNS IT INTO NEGATIVE
+    if (valueChange == true) {
+        tempDisplayValue.textContent = "";
+        displayValue.style.color = "white";
+        displayValue.textContent = newAns * -1;
+        newAns = newAns * -1;
+    }
 });
 
 // (+) BUTTON
 plusButton.addEventListener("click", function(e) {
     valueChange = true;
-    clickCount++;
     displayValue.textContent += "+";
     operationSelect = '+';
-
-    console.log("(" + operationSelect + ")" + " " + clickCount);
+    clickCount++;
 
     if (clickCount > 1) {
         currentAnswer = newAns;
+        tempDisplayValue.textContent = "";
         displayValue.textContent = currentAnswer + "+";
 
         previousValue = currentAnswer;
         nextValue = 0;
     }
+
 });
 
 // (-) BUTTON
 minusButton.addEventListener("click", function(e) {
     valueChange = true;
-    clickCount++;
     displayValue.textContent += "-";
     operationSelect = '-';
-
-    console.log("(" + operationSelect + ")" + " " + clickCount);
+    clickCount++;
 
     if (clickCount > 1) {
         currentAnswer = newAns;
+        tempDisplayValue.textContent = "";
         displayValue.textContent = currentAnswer + "-";
 
         previousValue = currentAnswer;
         nextValue = 0;
     }
-    console.log("P. value: " + previousValue);
-    console.log("Next value: " + nextValue);
-    console.log(clickCount);
 });
 
 // (×) BUTTON
 multiplyButton.addEventListener("click", function(e) {
     valueChange = true;
-    clickCount++;
     displayValue.textContent += "×";
     operationSelect = '*';
+    clickCount++;
 
     if (clickCount > 1) {
         currentAnswer = newAns;
+        tempDisplayValue.textContent = "";
         displayValue.textContent = currentAnswer + "×";
+        tempDisplayValue.textContent = "";
 
         previousValue = currentAnswer;
         nextValue = 0;
@@ -118,12 +122,14 @@ multiplyButton.addEventListener("click", function(e) {
 // (÷) BUTTON
 divideButton.addEventListener("click", function(e) {
     valueChange = true;
-    clickCount++;
     displayValue.textContent += "÷";
+    tempDisplayValue.textContent = "";
     operationSelect = '/';
+    clickCount++;
     
     if (clickCount > 1) {
         currentAnswer = newAns;
+        tempDisplayValue.textContent = "";
         displayValue.textContent = currentAnswer + "÷";
 
         previousValue = currentAnswer;
@@ -134,13 +140,13 @@ divideButton.addEventListener("click", function(e) {
 // (%) BUTTON
 modulusButton.addEventListener("click", function(e) {
     valueChange = true;
-    clickCount++;
     displayValue.textContent += "%";
     operationSelect = '%';
+    clickCount++;
     
     if (clickCount > 1) {
-
-        currentAnswer = operate(previousValue, operationSelect, nextValue);
+        currentAnswer = newAns;
+        tempDisplayValue.textContent = "";
         displayValue.textContent = currentAnswer + "%";
 
         previousValue = currentAnswer;
@@ -150,15 +156,14 @@ modulusButton.addEventListener("click", function(e) {
 
 // (=) BUTTON
 equalButton.addEventListener("click", function(e) {
-    clickCount = 0;
-    currentAnswer = operate(previousValue, operationSelect, nextValue);
-    displayValue.textContent = currentAnswer;
+    displayValue.style.color = "white";
+    tempDisplayValue.textContent = "";
 
+    clickCount = 0;
+    displayValue.textContent = newAns;
     previousValue = currentAnswer;
     nextValue = 0;
 });
-
-
 
 //OPERATION FUNCTIONS
 function add(a, b) {
@@ -179,18 +184,22 @@ function modulus(a, b) {
 
 //OPERATE
 function operate(a, operator, b) {
+    var result;
 
     if (operator == '+') {
-        return add(a, b);
+        result = add(a, b);
     } else if (operator == '-') {
-        return subtract(a, b);
+        result = subtract(a, b);
     } else if (operator == '*') {
-        return multiply(a, b);
+        result = multiply(a, b);
     } else if (operator == '/') {
-        return divide(a, b);
+        result = divide(a, b);
     } else if (operator == '%') {
-        return modulus(a, b)
+        result = modulus(a, b)
     } else {
-        return "ERROR!";
+        result = "ERROR!";
     }
+    
+    //INCLUDES DECIMAL POINT IF CONSISTS
+    return Number.isInteger(result) ? result : result.toFixed(2);
 }
