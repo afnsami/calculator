@@ -15,7 +15,7 @@ let divideButton = document.getElementById("divide");
 let modulusButton = document.getElementById("modulus");
 
 //RANDOM VARIABLES
-let screenContent, previousValue, nextValue, currentAnswer, newAns;
+let screenContent, previousValue, nextValue, currentAnswer;
 let operationSelect = '';
 let valueChange = false;
 let clickCount = 0;
@@ -34,8 +34,7 @@ numberButtons.forEach(function(button) {
 
             tempDisplayValue.textContent += e.target.textContent;
             nextValue = parseFloat(tempDisplayValue.textContent);
-            newAns = (operate(previousValue, operationSelect, nextValue));
-            currentAnswer = newAns;
+            currentAnswer = (operate(previousValue, operationSelect, nextValue));
         }
     });
 });
@@ -61,8 +60,8 @@ reverseSignButton.addEventListener("click", function(e) {
     if (valueChange == true) {
         tempDisplayValue.textContent = "";
         displayValue.style.color = "white";
-        displayValue.textContent = newAns * -1;
-        newAns = newAns * -1;
+        displayValue.textContent = currentAnswer * -1;
+        currentAnswer = currentAnswer * -1;
     }
 });
 
@@ -74,7 +73,6 @@ plusButton.addEventListener("click", function(e) {
     clickCount++;
 
     if (clickCount > 1) {
-        currentAnswer = newAns;
         tempDisplayValue.textContent = "";
         displayValue.textContent = currentAnswer + "+";
 
@@ -92,7 +90,6 @@ minusButton.addEventListener("click", function(e) {
     clickCount++;
 
     if (clickCount > 1) {
-        currentAnswer = newAns;
         tempDisplayValue.textContent = "";
         displayValue.textContent = currentAnswer + "-";
 
@@ -109,7 +106,6 @@ multiplyButton.addEventListener("click", function(e) {
     clickCount++;
 
     if (clickCount > 1) {
-        currentAnswer = newAns;
         tempDisplayValue.textContent = "";
         displayValue.textContent = currentAnswer + "×";
         tempDisplayValue.textContent = "";
@@ -128,7 +124,6 @@ divideButton.addEventListener("click", function(e) {
     clickCount++;
     
     if (clickCount > 1) {
-        currentAnswer = newAns;
         tempDisplayValue.textContent = "";
         displayValue.textContent = currentAnswer + "÷";
 
@@ -145,7 +140,6 @@ modulusButton.addEventListener("click", function(e) {
     clickCount++;
     
     if (clickCount > 1) {
-        currentAnswer = newAns;
         tempDisplayValue.textContent = "";
         displayValue.textContent = currentAnswer + "%";
 
@@ -160,7 +154,7 @@ equalButton.addEventListener("click", function(e) {
     tempDisplayValue.textContent = "";
 
     clickCount = 0;
-    displayValue.textContent = newAns;
+    displayValue.textContent = currentAnswer;
     previousValue = currentAnswer;
     nextValue = 0;
 });
@@ -184,7 +178,7 @@ function modulus(a, b) {
 
 //OPERATE
 function operate(a, operator, b) {
-    var result;
+    let result;
 
     if (operator == '+') {
         result = add(a, b);
