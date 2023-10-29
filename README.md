@@ -8,4 +8,4 @@
 
 <p>All I needed is to push myself a bit harder to come up with a logic and of course help from the Odin Community</p>
 
-<p>It took me 14 days and <b>18 hours</b> of work to finish.</p>
+<p>It took me 14 days of timeline or <b>18 hours</b> of work to finish.</p>
