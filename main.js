@@ -34,7 +34,7 @@ numberButtons.forEach(function(button) {
 
             tempDisplayValue.textContent += e.target.textContent;
             nextValue = parseFloat(tempDisplayValue.textContent);
-            currentAnswer = (operate(previousValue, operationSelect, nextValue));
+            currentAnswer = parseFloat(operate(previousValue, operationSelect, nextValue));
         }
     });
 });
@@ -80,7 +80,6 @@ plusButton.addEventListener("click", function(e) {
         previousValue = currentAnswer;
         nextValue = 0;
     }
-
 });
 
 // (-) BUTTON
@@ -153,11 +152,13 @@ modulusButton.addEventListener("click", function(e) {
 equalButton.addEventListener("click", function(e) {
     displayValue.style.color = "white";
     tempDisplayValue.textContent = "";
+    valueChange = false;
 
     clickCount = 0;
+    nextValue = 0;
+    operationSelect = '';
     displayValue.textContent = currentAnswer;
     previousValue = currentAnswer;
-    nextValue = 0;
 });
 
 //OPERATION FUNCTIONS
@@ -200,10 +201,9 @@ function operate(a, operator, b) {
     }
     
     //RETURN ERROR IF DIVIDED BY '0'
-    if (typeof result === 'string') {
-        return result;
-    } else {
-        //INCLUDES DECIMAL POINT IF CONSISTS
+    if (typeof result === 'number') {
         return Number.isInteger(result) ? result : result.toFixed(2);
+    } else {
+        return result;
     }
 }
