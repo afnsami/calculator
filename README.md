@@ -1,5 +1,5 @@
 # Calculator
-## Live Preview <a href="https://anaseig.github.io/calculator" target="_blank">HERE</a>
+## Live Preview <a href="https://afnsami.github.io/calculator" target="_blank">HERE</a>
 
 <img src="images/preview.png">
 
