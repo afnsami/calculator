@@ -4,7 +4,7 @@
 <img src="images/preview.png">
 
 <p>This was my last project for the <b>Foundations</b> section. So I was very excited when I was about to finish.</p>
-<p>I thought this project would be very hard, but turns out it was easier than I thought. Mainly because of I learned a lot in the previous <a href="https://github.com/anaseig/pixel_sketch">Pixel Sketch</a> project, and I was able to transfer what I've learned in this project.</p>
+<p>I thought this project would be very hard, but turns out it was easier than I thought. Mainly because of I learned a lot in the previous <a href="https://github.com/afnsami/pixel_sketch">Pixel Sketch</a> project, and I was able to transfer what I've learned in this project.</p>
 <p>All I needed is to push myself a bit harder to come up with a logic and of course, some help from the <a href="https://discord.gg/fbFCkYabZB">Odin Community</a>. <br>
 <br>
 I know it is not perfect, and still it needs some improvements, even some very useful features. So I will be looking forward to update this. (if I don't procastinate)</p>
